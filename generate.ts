@@ -2,7 +2,12 @@ import {
   createCanvas,
   loadImage,
 } from "https://deno.land/x/canvas@v1.4.1/mod.ts";
+import {
+  Image,
+  monochromeDither,
+} from "https://deno.land/x/monke@v0.0.4/mod.ts";
 import Data from "./data.ts";
+import { Color } from "https://deno.land/x/colors@v0.0.1/src/color.ts";
 export async function generateCaptcha() {
   const id = Math.ceil(Math.random() * 20);
   const bg = await loadImage(`bg/${id}.jpg`);
@@ -68,6 +73,11 @@ export async function generateCaptcha() {
 
   ctx.fillRect(0, 0, 792, 792);
 
+  const image = new Image(ctx.getImageData(0, 0, 792, 792).data, 792, 792);
+
+  image.dither([new Color(0, 0, 0), new Color(255, 255, 255)]);
+  ctx.putImageData(image.toImageData(), 0, 0);
+
   return {
     data: added,
     image: canvas.toDataURL(),
@@ -95,6 +105,11 @@ function findClosestImage(
   return closest.i;
 }
 
-export function meanDistance(dx: number, dy: number, x: number, y: number): number {
+export function meanDistance(
+  dx: number,
+  dy: number,
+  x: number,
+  y: number,
+): number {
   return (Math.abs(x - dx) + Math.abs(y - dy)) / 2;
 }
