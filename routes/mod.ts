@@ -47,7 +47,7 @@ router.post("/challenge", async (ctx) => {
     ctx.response.status = 200;
     ctx.response.body = { message: "Success" };
   } else {
-    ctx.response.status = 200;
+    ctx.response.status = 400;
     ctx.response.body = { message: "Failed" };
   }
   points.delete(id)
