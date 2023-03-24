@@ -67,9 +67,6 @@ export async function generateCaptcha() {
   }, ${Math.floor(Math.random() * 256)}, 0.3)`;
 
   ctx.fillRect(0, 0, 792, 792);
-  const res = canvas.toBuffer("image/png");
-
-  await Deno.writeFile("res.png", res);
 
   return {
     data: added,
