@@ -20,6 +20,7 @@ router.get("/challenge", async (ctx) => {
   ctx.response.status = 200;
   ctx.response.body = {
     prompts: [rand[0].info, rand[1].info],
+    id: id,
     image: captcha.image,
   };
 });
