@@ -103,7 +103,7 @@ export default [
     ["time","sands"],
     ["finger","one"],
     ["palm","stop"],
-    ["hand","peas"],
+    ["hand","peace"],
     ["pencil","write"],
     ["sign","danger"],
     ["sun","shiny"],
