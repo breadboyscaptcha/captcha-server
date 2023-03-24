@@ -12,9 +12,13 @@ router.get("/challenge", async (ctx) => {
   console.log("Challenged");
   const captcha = await generateCaptcha();
   const id = Date.now();
+  const r1 = Math.floor(Math.random() * captcha.data.length);
   const rand = [
-    captcha.data[Math.floor(Math.random() * captcha.data.length)],
-    captcha.data[Math.floor(Math.random() * captcha.data.length)],
+    captcha.data[r1],
+    [
+      ...captcha.data.slice(0, r1),
+      ...captcha.data.slice(r1),
+    ][Math.floor(Math.random() * captcha.data.length)],
   ];
   points.set(id, rand);
   ctx.response.status = 200;
@@ -39,6 +43,12 @@ router.post("/challenge", async (ctx) => {
     ctx.response.status = 404;
     return;
   }
+  console.log(
+    pts,
+    data,
+    meanDistance(pts[0][0], pts[0][1], data[0].points[0], data[0].points[1]),
+    meanDistance(pts[1][0], pts[1][1], data[1].points[0], data[1].points[1]),
+  );
   if (
     meanDistance(pts[0][0], pts[0][1], data[0].points[0], data[0].points[1]) <=
       36 &&
@@ -51,7 +61,7 @@ router.post("/challenge", async (ctx) => {
     ctx.response.status = 400;
     ctx.response.body = { message: "Failed" };
   }
-  points.delete(id)
+  points.delete(id);
 });
 
 export const challenge = router;
