@@ -17,7 +17,7 @@ router.get("/challenge", async (ctx) => {
     captcha.data[r1],
     [
       ...captcha.data.slice(0, r1),
-      ...captcha.data.slice(r1),
+      ...(captcha.data.length !== r1 -1 ? captcha.data.slice(r1 + 1) : []),
     ][Math.floor(Math.random() * captcha.data.length)],
   ];
   points.set(id, rand);
