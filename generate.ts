@@ -64,7 +64,7 @@ export async function generateCaptcha() {
 
   ctx.fillStyle = `rgba(${Math.floor(Math.random() * 256)}, ${
     Math.floor(Math.random() * 256)
-  }, ${Math.floor(Math.random() * 256)}, 0.5)`;
+  }, ${Math.floor(Math.random() * 256)}, 0.3)`;
 
   ctx.fillRect(0, 0, 792, 792);
 
