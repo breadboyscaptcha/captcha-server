@@ -75,7 +75,7 @@ export async function generateCaptcha() {
 
   const image = new Image(ctx.getImageData(0, 0, 792, 792).data, 792, 792);
 
-  image.dither([new Color(0, 0, 0), new Color(255, 255, 255)]);
+ // image.dither([new Color(0, 0, 0), new Color(255, 255, 255)]);
   ctx.putImageData(image.toImageData(), 0, 0);
 
   return {
